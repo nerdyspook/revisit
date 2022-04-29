@@ -6,6 +6,8 @@ import Login from "./pages/Auth/Login";
 import Search from "./pages/Search/Search";
 import { useState } from "react";
 import Error from "./pages/Error/Error";
+import Watch from "./pages/Watch/Watch";
+import SignUp from "./pages/Auth/SignUp";
 
 const Layout = () => {
     const [showNav, setShowNav] = useState(false);
@@ -31,8 +33,10 @@ const App = () => {
                     <Route index element={<Home />} />
                     <Route path="home" element={<Home />} />
                     <Route path="search" element={<Search />} />
+                    <Route path="watch" element={<Watch />} />
                 </Route>
                 <Route path="/auth" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
                 <Route path="*" element={<Error />} />
             </Routes>
         </div>
