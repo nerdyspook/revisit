@@ -45,6 +45,14 @@
         span {
             display: block;
         }
+
+        &.hide {
+            display: block;
+        }
+    }
+
+    &.hide {
+        display: none;
     }
 }
 

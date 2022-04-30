@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     MdSubscriptions,
     MdExitToApp,
@@ -9,11 +9,16 @@ import {
 } from "react-icons/md";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import "./Sidebar.scss";
+import { useLocation } from "react-router-dom";
 
 const Sidebar = ({ show, setShowNav }) => {
+    const { pathname } = useLocation();
+
     return (
         <nav
-            className={`video__sidebar ${show && "open"}`}
+            className={`video__sidebar ${show && "open"} ${
+                pathname === "/watch" && "hide"
+            }`}
             onClick={() => setShowNav((prevValue) => !prevValue)}
         >
             <li>
