@@ -12,10 +12,6 @@
     @media screen and (min-width: 1024px) {
         margin-top: 1.5rem;
     }
-
-    // @media screen and (min-width: 1600px) {
-    //     margin-left: calc(100vw - 1600px);
-    // }
 }
 
 .watch__wrap {
@@ -96,18 +92,18 @@
 }
 
 .color--gray {
-    color: #909090;
+    color: var(--gray-color);
 }
 
 .watch__likeBtnContainer > p {
-    color: #aaaaaa;
+    color: var(--gray-color);
     font-weight: 500;
     font-size: 0.9rem;
 }
 
 .watch__likeDislikeRatio {
     display: flex;
-    background-color: #606060;
+    background-color: var(--gray-color);
     height: 2px;
     overflow: hidden;
     margin-top: 0.75rem;
@@ -119,7 +115,7 @@
         display: block;
         height: 100%;
         width: 100%;
-        background-color: #818181;
+        background-color: var(--text-color-light);
         transform: translateX(-8px);
     }
 }
@@ -147,7 +143,7 @@
 .watch__details {
     padding-bottom: 1.5rem;
     margin-top: 1.5rem;
-    border-bottom: 1px solid #292929;
+    border-bottom: 1px solid var(--dark-color);
 }
 
 .watch__subCount {
@@ -205,14 +201,6 @@
 .watch__detailsContainer {
     display: flex;
     justify-content: space-between;
-
-    .watch__subBtn {
-        color: #ffffff;
-        background-color: #cc0000;
-        padding: 0 2rem;
-        border: none;
-        border-radius: 3px;
-    }
 }
 
 .watch__right {
