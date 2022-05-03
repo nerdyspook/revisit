@@ -10,7 +10,8 @@
     border-right: 1px solid var(--white-color);
     transition: transform 0.3s ease-in;
 
-    a {
+    a,
+    .logout {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -35,6 +36,10 @@
         }
     }
 
+    a.active {
+        background-color: var(--gray-color);
+    }
+
     hr {
         background-color: var(--gray-color);
     }
@@ -42,7 +47,8 @@
     &.open {
         transform: translateX(0);
         width: 350px;
-        a {
+        a,
+        .logout {
             justify-content: unset;
         }
         span {
@@ -63,7 +69,8 @@
     .video__sidebar {
         width: 90px;
 
-        a {
+        a,
+        .logout {
             justify-content: center;
         }
         span {
@@ -73,7 +80,8 @@
         &.open {
             width: 250px;
 
-            a {
+            a,
+            .logout {
                 justify-content: unset;
             }
             span {
@@ -90,7 +98,8 @@
         position: fixed;
         z-index: 1000;
 
-        a {
+        a,
+        .logout {
             justify-content: flex-start;
         }
         span {

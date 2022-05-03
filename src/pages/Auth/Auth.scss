@@ -16,6 +16,24 @@
         display: flex;
         flex-direction: column;
         margin-bottom: 1rem;
+
+        position: relative;
+
+        input[type="password"]::-ms-reveal,
+        input[type="password"]::-ms-clear {
+            display: none;
+        }
+        .password-eye {
+            position: absolute;
+            top: 1.75rem;
+            right: 0.5rem;
+            font-size: var(--h1-font-size);
+            cursor: pointer;
+
+            @media screen and(min-width:968px) {
+                font-size: var(--h2-font-size);
+            }
+        }
     }
 
     form {
