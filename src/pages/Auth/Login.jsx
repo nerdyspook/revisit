@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { loginUser } from "../../utilities/Auth/login";
+import { useAuth } from "../../context/AuthContext";
+
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import "./Auth.scss";
 
 const Login = () => {
@@ -7,7 +11,10 @@ const Login = () => {
         "^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\\])$"
     );
 
+    const { dispatchAuth } = useAuth();
+    const location = useLocation();
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
 
     const [userDetail, setUserDetail] = useState({
         email: "",
@@ -40,11 +47,26 @@ const Login = () => {
                     <label htmlFor="password">Password</label>
                     <input
                         placeholder="Must be atleast 8 characters"
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         name="password"
                         id="password"
                         onChange={handleChange}
                     />
+                    {showPassword ? (
+                        <AiOutlineEye
+                            className="password-eye"
+                            onClick={() =>
+                                setShowPassword((prevState) => !prevState)
+                            }
+                        />
+                    ) : (
+                        <AiOutlineEyeInvisible
+                            className="password-eye"
+                            onClick={() =>
+                                setShowPassword((prevState) => !prevState)
+                            }
+                        />
+                    )}
                 </div>
 
                 <div className="input__container-cta">
@@ -57,8 +79,38 @@ const Login = () => {
                     </Link>
                 </div>
 
-                <div className="btn login__btn" onClick={() => {}}>
+                <div
+                    className="btn login__btn"
+                    onClick={() => {
+                        email && password
+                            ? !EMAIL_REGEX.test(email)
+                                ? alert("Please enter a valid email")
+                                : loginUser(
+                                      email,
+                                      password,
+                                      dispatchAuth,
+                                      navigate,
+                                      location
+                                  )
+                            : alert("Please fill all the fields");
+                    }}
+                >
                     Log In
+                </div>
+
+                <div
+                    className="btn login__btn"
+                    onClick={() => {
+                        loginUser(
+                            "test@gmail.com",
+                            "test",
+                            dispatchAuth,
+                            navigate,
+                            location
+                        );
+                    }}
+                >
+                    Log In as Guest
                 </div>
 
                 <div className="login__container">

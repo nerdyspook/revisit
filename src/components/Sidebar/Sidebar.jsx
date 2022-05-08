@@ -8,10 +8,24 @@ import {
 } from "react-icons/md";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import "./Sidebar.scss";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Sidebar = ({ show, setShowNav }) => {
     const { pathname } = useLocation();
+
+    const navigate = useLocation();
+    const {
+        stateAuth: { isAuth },
+        dispatchAuth,
+    } = useAuth();
+
+    const handleLogout = () => {
+        dispatchAuth({ type: "LOGOUT" });
+        localStorage.removeItem("token");
+        localStorage.removeItem("name");
+        navigate("/auth");
+    };
 
     return (
         <nav
@@ -19,43 +33,58 @@ const Sidebar = ({ show, setShowNav }) => {
                 pathname === "/watch" && "hide"
             }`}
         >
-            <Link to="/" onClick={() => setShowNav((prevValue) => !prevValue)}>
+            <NavLink
+                to="/"
+                onClick={() => setShowNav((prevValue) => !prevValue)}
+            >
                 <MdHome size={23} />
                 <span>Home</span>
-            </Link>
+            </NavLink>
 
-            <Link to="/" onClick={() => setShowNav((prevValue) => !prevValue)}>
+            <NavLink
+                to="/liked"
+                onClick={() => setShowNav((prevValue) => !prevValue)}
+            >
                 <MdThumbUp size={23} />
                 <span>Liked Videos</span>
-            </Link>
+            </NavLink>
 
-            <Link to="/" onClick={() => setShowNav((prevValue) => !prevValue)}>
+            <NavLink
+                to="/history"
+                onClick={() => setShowNav((prevValue) => !prevValue)}
+            >
                 <MdHistory size={23} />
                 <span>History</span>
-            </Link>
+            </NavLink>
 
-            <Link to="/" onClick={() => setShowNav((prevValue) => !prevValue)}>
+            <NavLink
+                to="/library"
+                onClick={() => setShowNav((prevValue) => !prevValue)}
+            >
                 {" "}
                 <MdLibraryBooks size={23} />
                 <span>Library</span>
-            </Link>
+            </NavLink>
 
-            <Link to="/" onClick={() => setShowNav((prevValue) => !prevValue)}>
-                <AiOutlineClockCircle size={23} />
-                <span>Watch Later</span>
-            </Link>
-
-            <hr />
-
-            <Link
-                to="/auth"
+            <NavLink
+                to="/watch-later"
                 onClick={() => setShowNav((prevValue) => !prevValue)}
             >
-                <MdExitToApp size={23} />
-                <span>Log Out</span>
-            </Link>
+                <AiOutlineClockCircle size={23} />
+                <span>Watch Later</span>
+            </NavLink>
 
-            <hr />
+            {isAuth && (
+                <>
+                    <hr />
+                    <div className="logout" onClick={handleLogout}>
+                        <MdExitToApp size={23} />
+                        <span>Log Out</span>
+                    </div>
+
+                    <hr />
+                </>
+            )}
         </nav>
     );
 };
