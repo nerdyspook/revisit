@@ -1,9 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useVideo } from "../../context/VideoContext";
 import "./VideoCardSmall.scss";
 
 const VideoCardSmall = ({
     channelView = false,
+    id,
     thumbnail,
     title,
     creator,
@@ -11,14 +13,20 @@ const VideoCardSmall = ({
     length,
 }) => {
     const navigate = useNavigate();
-    const handleClickRedirect = () => {
-        navigate("/watch");
+    const {
+        stateVideo: { videos },
+    } = useVideo();
+
+    const watchVideo = (id) => {
+        const singleVideo = videos.find((video) => video._id === id);
+        sessionStorage.setItem("current", JSON.stringify(singleVideo));
+        navigate(`/watch/${id}`);
     };
 
     return (
         <div
-            onClick={handleClickRedirect}
             className={`videoSmall ${channelView && "videoSmall__channelView"}`}
+            onClick={() => watchVideo(id)}
         >
             <div className="videoSmall__left">
                 <img
