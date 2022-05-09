@@ -38,7 +38,7 @@ const App = () => {
                     <Route index element={<Home />} />
                     <Route path="home" element={<Home />} />
                     <Route path="search" element={<Search />} />
-                    <Route path="watch" element={<Watch />} />
+                    <Route path="watch/:videoId" element={<Watch />} />
                     <Route
                         path="liked"
                         element={

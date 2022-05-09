@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { videoReducer } from "../reducers/VideoReducer";
 
 const VideoContext = createContext(null);
