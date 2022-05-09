@@ -1,7 +1,7 @@
 import React from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { IoRemoveCircle } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useVideo } from "../../context/VideoContext";
 import { addToHistory } from "../../utilities/History/add-history";
 import { removeFromHistory } from "../../utilities/History/remove-history";
@@ -9,6 +9,7 @@ import "./VideoCard.scss";
 
 const VideoCard = ({ thumbnail, title, creator, length, views, id, icon }) => {
     const navigate = useNavigate();
+    const { pathname } = useLocation();
 
     const {
         stateVideo: { videos },
@@ -59,9 +60,12 @@ const VideoCard = ({ thumbnail, title, creator, length, views, id, icon }) => {
                 </div>
                 <div className="video__options">
                     <BsThreeDotsVertical />
-                    <IoRemoveCircle
-                        onClick={() => removeFromHistory(id, dispatchVideo)}
-                    />
+
+                    {pathname === "/history" && (
+                        <IoRemoveCircle
+                            onClick={() => removeFromHistory(id, dispatchVideo)}
+                        />
+                    )}
                 </div>
             </div>
         </div>
