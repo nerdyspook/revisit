@@ -6,6 +6,7 @@ import App from "./App";
 import "./index.css";
 import "./reset.scss";
 import { AuthContextProvider } from "./context/AuthContext";
+import { VideoContextProvider } from "./context/VideoContext";
 
 // Call make Server
 makeServer();
@@ -15,7 +16,9 @@ root.render(
     <React.StrictMode>
         <BrowserRouter>
             <AuthContextProvider>
-                <App />
+                <VideoContextProvider>
+                    <App />
+                </VideoContextProvider>
             </AuthContextProvider>
         </BrowserRouter>
     </React.StrictMode>

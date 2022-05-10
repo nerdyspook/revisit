@@ -1,23 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Categories.scss";
 
 const keywords = [
     "All",
-    "React js",
-    "Redux",
-    "Music",
-    "Coding",
-    "Cricket",
-    "Football",
-    "Real Madrid",
-    "Gatsby",
+    "Mountains",
+    "Deserts",
+    "Beaches",
+    "Tropical",
+    "Urban",
+    "Rural",
+    "America",
+    "Asia",
+    "Europe",
+    "Africa",
 ];
 
-const Categories = () => {
-    const [activeElement, setActiveElement] = useState("All");
-
+const Categories = ({ filter, category }) => {
     const handleClick = (value) => {
-        setActiveElement(value);
+        filter(value);
     };
 
     return (
@@ -25,7 +25,7 @@ const Categories = () => {
             {keywords.map((value, i) => (
                 <span
                     key={i}
-                    className={activeElement === value ? "active" : ""}
+                    className={category === value ? "active" : ""}
                     onClick={() => handleClick(value)}
                 >
                     {value}
