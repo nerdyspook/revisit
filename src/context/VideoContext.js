@@ -8,6 +8,7 @@ const VideoContextProvider = ({ children }) => {
         loading: true,
         videos: [],
         history: [],
+        watchLater: [],
     });
 
     return (
