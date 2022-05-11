@@ -6,7 +6,6 @@ const LikedVideos = () => {
     const {
         stateVideo: { liked },
     } = useVideo();
-    console.log(liked);
 
     return (
         <>
