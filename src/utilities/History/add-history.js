@@ -1,14 +1,14 @@
 import axios from "axios";
 
 export const addToHistory = async (video, dispatchVideo) => {
-    const token = localStorage.getItem("token");
+    const encodedToken = localStorage.getItem("token");
     try {
         const response = await axios({
             method: "POST",
             url: "/api/user/history",
             data: { video },
             headers: {
-                authorization: token,
+                authorization: encodedToken,
             },
         });
 
