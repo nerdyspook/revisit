@@ -1,15 +1,25 @@
 import React from "react";
-import VideoCard from "../../components/VideoCard/VideoCard";
+import PlaylistCard from "../../components/PlaylistCard/PlaylistCard";
+import { useVideo } from "../../context/VideoContext";
+import "./Library.scss";
 
 const Library = () => {
+    const { stateVideo, dispatchVideo } = useVideo();
+    const { playlists } = stateVideo;
+
     return (
         <div className="videos">
-            {[...new Array(20)].map((item, index) => (
-                <div className="videos__wrap" key={index}>
-                    {" "}
-                    <VideoCard key={index} />
-                </div>
-            ))}
+            {playlists.length !== 0 ? (
+                playlists.map((playlist, index) => (
+                    <PlaylistCard
+                        playlist={playlist}
+                        key={index}
+                        dispatchVideo={dispatchVideo}
+                    />
+                ))
+            ) : (
+                <div className="regret">Sorry no playlists created by you!</div>
+            )}
         </div>
     );
 };
