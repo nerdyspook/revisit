@@ -38,11 +38,13 @@ const Home = () => {
                     <div className="videos__wrap" key={index}>
                         <VideoCard
                             key={index}
+                            id={item._id}
                             thumbnail={item.thumbnail}
                             title={item.title}
                             creator={item.creator}
                             length={item.videoLength}
                             views={item.views}
+                            icon={item.channelIcon}
                         />
                     </div>
                 ))}
