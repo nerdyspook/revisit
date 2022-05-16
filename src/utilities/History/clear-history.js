@@ -1,14 +1,14 @@
 import axios from "axios";
 
 export const clearHistory = async (dispatchVideo) => {
-    const token = localStorage.getItem("token");
+    const encodedToken = localStorage.getItem("token");
 
     try {
         const response = await axios({
             method: "DELETE",
             url: "/api/user/history/all",
             headers: {
-                authorization: token,
+                authorization: encodedToken,
             },
         });
 

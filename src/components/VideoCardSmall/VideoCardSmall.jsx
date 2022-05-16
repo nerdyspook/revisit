@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useVideo } from "../../context/VideoContext";
+import { addToHistory } from "../../utilities/History/add-history";
 import "./VideoCardSmall.scss";
 
 const VideoCardSmall = ({
@@ -14,12 +15,15 @@ const VideoCardSmall = ({
 }) => {
     const navigate = useNavigate();
     const {
-        stateVideo: { videos },
+        stateVideo: { videos, history },
+        dispatchVideo,
     } = useVideo();
 
     const watchVideo = (id) => {
         const singleVideo = videos.find((video) => video._id === id);
         sessionStorage.setItem("current", JSON.stringify(singleVideo));
+        history.find((video) => video._id === id) ??
+            addToHistory(singleVideo, dispatchVideo);
         navigate(`/watch/${id}`);
     };
 
