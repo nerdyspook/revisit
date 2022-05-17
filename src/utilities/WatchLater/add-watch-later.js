@@ -1,11 +1,12 @@
 import axios from "axios";
 
-export const addToHistory = async (video, dispatchVideo) => {
+export const addToWatchLater = async (video, dispatchVideo) => {
     const encodedToken = localStorage.getItem("token");
+
     try {
         const response = await axios({
             method: "POST",
-            url: "/api/user/history",
+            url: "/api/user/watchLater",
             data: { video },
             headers: {
                 authorization: encodedToken,
@@ -14,8 +15,8 @@ export const addToHistory = async (video, dispatchVideo) => {
 
         if (response.status === 201) {
             dispatchVideo({
-                type: "UPDATE_HISTORY",
-                payload: response.data.history,
+                type: "UPDATE_WATCH_LATER",
+                payload: response.data.watchLater,
             });
         }
     } catch (e) {
