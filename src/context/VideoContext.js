@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 import { videoReducer } from "../reducers/VideoReducer";
 
 const VideoContext = createContext(null);
@@ -7,6 +7,8 @@ const VideoContextProvider = ({ children }) => {
     const [stateVideo, dispatchVideo] = useReducer(videoReducer, {
         loading: true,
         videos: [],
+        history: [],
+        watchLater: [],
     });
 
     return (
