@@ -1,7 +1,7 @@
 @import "../../reset.scss";
 
 .video {
-    // background-color: red;
+    position: relative;
     margin-bottom: 1rem;
     margin: 1rem;
     padding: 0.5rem;
@@ -11,6 +11,21 @@
     font-size: 0.9rem;
 
     cursor: pointer;
+
+    .modal {
+        transform: translateX(-4.5rem) translateY(2rem);
+        padding: 0;
+        border-radius: 0.4rem;
+
+        .watch-later,
+        .library {
+            padding: 0.75rem;
+
+            &:hover {
+                background-color: var(--gray-color);
+            }
+        }
+    }
 
     &:hover {
         border-radius: 0.4rem;

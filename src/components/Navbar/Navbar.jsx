@@ -16,14 +16,6 @@ const Navbar = ({ setShowNav }) => {
                 <p className="brand__name">Revisit</p>
             </div>
 
-            <div className="brand">
-                {/* <img
-                    src="https://i.ibb.co/SvwtRRk/Video-Library-Logo.png"
-                    alt="logo"
-                    className="revisit__header__logo"
-                /> */}
-            </div>
-
             <form>
                 <input type="text" placeholder="Search here" />
                 <button type="submit">

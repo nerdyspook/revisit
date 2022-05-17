@@ -7,6 +7,8 @@ const VideoContextProvider = ({ children }) => {
     const [stateVideo, dispatchVideo] = useReducer(videoReducer, {
         loading: true,
         videos: [],
+        history: [],
+        watchLater: [],
     });
 
     return (
