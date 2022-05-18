@@ -7,6 +7,8 @@ import VideoCardSmall from "../../components/VideoCardSmall/VideoCardSmall";
 import { useVideo } from "../../context/VideoContext";
 import { loadVideos } from "../../utilities/Videos/load-videos";
 import { getRandomInt } from "../../utilities/random-list-size";
+import { addToLiked } from "../../utilities/Liked/add-liked";
+import { removeFromLiked } from "../../utilities/Liked/remove-liked";
 
 const Watch = () => {
     const [more, setMore] = useState(false);
@@ -18,7 +20,7 @@ const Watch = () => {
 
     const { videoId } = useParams();
     const {
-        stateVideo: { videos },
+        stateVideo: { videos, liked },
         dispatchVideo,
     } = useVideo();
 
@@ -33,11 +35,19 @@ const Watch = () => {
         description,
     } = JSON.parse(sessionStorage.getItem("current"));
 
+    const [min, max] = getRandomInt(videos.length);
+
+    const likeHandler = (id) => {
+        const singleVideo = videos.find((video) => video._id === id);
+
+        liked.find((video) => video._id === id)
+            ? removeFromLiked(id, dispatchVideo)
+            : addToLiked(singleVideo, dispatchVideo);
+    };
+
     useEffect(() => {
         loadVideos(dispatchVideo);
     }, []);
-
-    const [min, max] = getRandomInt(videos.length);
 
     return (
         <div className="watch">
@@ -68,7 +78,17 @@ const Watch = () => {
                                     <div className="watch__likeContainer">
                                         <div className="watch__likeWrap">
                                             <div className="watch__likeBtnContainer color--gray">
-                                                <AiFillLike className="watch__icon" />
+                                                <AiFillLike
+                                                    className={`watch__icon ${
+                                                        liked.find(
+                                                            (video) =>
+                                                                video._id === id
+                                                        ) && "liked"
+                                                    }`}
+                                                    onClick={() =>
+                                                        likeHandler(id)
+                                                    }
+                                                />
                                                 <p>20K</p>
                                             </div>
                                             <div className="watch__likeBtnContainer color--gray">

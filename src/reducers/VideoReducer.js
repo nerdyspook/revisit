@@ -1,3 +1,5 @@
+import { act } from "react-dom/test-utils";
+
 export const videoReducer = (stateVideo, actionVideo) => {
     switch (actionVideo.type) {
         case "LOAD_VIDEOS":
@@ -18,6 +20,9 @@ export const videoReducer = (stateVideo, actionVideo) => {
 
         case "UPDATE_WATCH_LATER":
             return { ...stateVideo, watchLater: actionVideo.payload };
+
+        case "UPDATE_LIKED":
+            return { ...stateVideo, liked: actionVideo.payload };
 
         default:
             return stateVideo;
