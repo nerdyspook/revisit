@@ -103,6 +103,10 @@
 
 .watch__icon {
     margin-right: 0.25rem;
+
+    &.liked {
+        color: var(--dark-color);
+    }
 }
 
 .color--gray {
