@@ -18,7 +18,7 @@ const PlaylistModal = ({ setShowPlaylistModal, videoDetails }) => {
     const inPlaylist = (videoId, playlistId, playlists) =>
         playlists
             ?.find((playlist) => playlist._id === playlistId)
-            ?.videos.some((playlist) => playlist._id === videoId);
+            ?.videos.some((video) => video._id === videoId);
 
     const playlistCheckboxHandler = (event, playlistId) => {
         event.target.checked
