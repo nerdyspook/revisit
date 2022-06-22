@@ -28,7 +28,7 @@ const Home = () => {
     }, []);
 
     return (
-        <div>
+        <div className="home">
             <Categories filter={setFilterCategory} category={filterCategory} />
             <div className="banner">
                 <div className="banner__text">Feed your wanderlust</div>
@@ -38,6 +38,7 @@ const Home = () => {
                     <div className="videos__wrap" key={index}>
                         <VideoCard
                             key={index}
+                            video={item}
                             id={item._id}
                             thumbnail={item.thumbnail}
                             title={item.title}

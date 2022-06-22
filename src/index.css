@@ -16,7 +16,17 @@ code {
     height: 90vh;
     display: flex;
 }
+@media screen and(max-width: 520px) {
+    .home__container {
+        width: 100vw;
+    }
+
+    .home__main {
+        max-width: 95vw;
+    }
+}
 
 .home__main {
+    width: 100%;
     overflow-y: scroll;
 }

@@ -1,19 +1,32 @@
 import React, { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { IoRemoveCircle } from "react-icons/io5";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useVideo } from "../../context/VideoContext";
 import { addToHistory } from "../../utilities/History/add-history";
 import { removeFromHistory } from "../../utilities/History/remove-history";
+import { removeVideoFromPlaylist } from "../../utilities/Playlist/remove-playlist-video";
 import { addToWatchLater } from "../../utilities/WatchLater/add-watch-later";
 import { removeFromWatchLater } from "../../utilities/WatchLater/remove-watch-later";
+import PlaylistModal from "../PlaylistModal/PlaylistModal";
 import "./VideoCard.scss";
 
-const VideoCard = ({ thumbnail, title, creator, length, views, id, icon }) => {
+const VideoCard = ({
+    thumbnail,
+    title,
+    creator,
+    length,
+    views,
+    id,
+    icon,
+    video,
+}) => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
+    const { playlistId } = useParams();
 
     const [showOptions, setShowOptions] = useState(false);
+    const [showPlaylistModal, setShowPlaylistModal] = useState(false);
 
     const {
         stateVideo: { videos, history, watchLater },
@@ -39,6 +52,11 @@ const VideoCard = ({ thumbnail, title, creator, length, views, id, icon }) => {
         }
 
         setShowOptions(false);
+    };
+
+    const libraryButtonHandler = () => {
+        setShowOptions(false);
+        setShowPlaylistModal(true);
     };
 
     const removeHandler = (id) => {
@@ -98,6 +116,17 @@ const VideoCard = ({ thumbnail, title, creator, length, views, id, icon }) => {
                     {pathname === "/watch-later" && (
                         <IoRemoveCircle onClick={() => removeHandler(id)} />
                     )}
+                    {pathname.includes("/library") && (
+                        <IoRemoveCircle
+                            onClick={() =>
+                                removeVideoFromPlaylist(
+                                    id,
+                                    playlistId,
+                                    dispatchVideo
+                                )
+                            }
+                        />
+                    )}
                 </div>
             </div>
 
@@ -121,7 +150,7 @@ const VideoCard = ({ thumbnail, title, creator, length, views, id, icon }) => {
                             </div>
                             <div
                                 className="library"
-                                onClick={() => setShowOptions(false)}
+                                onClick={() => libraryButtonHandler()}
                             >
                                 Add to Library
                             </div>
@@ -129,6 +158,22 @@ const VideoCard = ({ thumbnail, title, creator, length, views, id, icon }) => {
                     )}
                 </div>
             </div>
+
+            <div
+                className={`modal playlist__modal ${
+                    showPlaylistModal ? "" : "hidden"
+                }`}
+            >
+                <div className="modal-details">
+                    {showPlaylistModal && (
+                        <PlaylistModal
+                            setShowPlaylistModal={setShowPlaylistModal}
+                            videoDetails={video}
+                        />
+                    )}
+                </div>
+            </div>
+
             <div className="modal-back hidden"></div>
         </div>
     );

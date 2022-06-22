@@ -13,6 +13,7 @@ import History from "./pages/History/History";
 import Library from "./pages/Library/Library";
 import WatchLater from "./pages/WatchLater/WatchLater";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
+import SinglePlaylist from "./pages/SinglePlaylist/SinglePlaylist";
 
 const Layout = () => {
     const [showNav, setShowNav] = useState(true);
@@ -55,14 +56,20 @@ const App = () => {
                             </RequireAuth>
                         }
                     />
-                    <Route
-                        path="library"
-                        element={
-                            <RequireAuth>
-                                <Library />
-                            </RequireAuth>
-                        }
-                    />
+                    <Route path="library">
+                        <Route
+                            index
+                            element={
+                                <RequireAuth>
+                                    <Library />
+                                </RequireAuth>
+                            }
+                        />
+                        <Route
+                            path=":playlistId"
+                            element={<SinglePlaylist />}
+                        />
+                    </Route>
                     <Route
                         path="watch-later"
                         element={

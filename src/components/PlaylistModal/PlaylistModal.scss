@@ -1,0 +1,132 @@
+.playlist__modal-inside {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    color: var(--title-color);
+
+    .top,
+    .bottom {
+        font-weight: var(--font-semi-bold);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 0.5rem;
+    }
+
+    .top {
+        border-bottom: 1px solid var(--text-color-light);
+        @media screen and(min-width: 375px) {
+            font-size: 0.75rem;
+        }
+    }
+
+    .bottom {
+        border-top: 1px solid var(--text-color-light);
+        justify-content: unset;
+
+        p {
+            margin-left: 0.5rem;
+        }
+        @media screen and(min-width: 375px) {
+            font-size: 0.65rem;
+        }
+
+        &.create {
+            display: block;
+            padding: 0.5rem;
+
+            input {
+                width: 100%;
+                padding: 0.25rem;
+                margin-bottom: 0.5rem;
+
+                border: 1px solid var(--text-color-light);
+                border-radius: 4px;
+
+                outline: none;
+            }
+
+            &__button {
+                padding: 0.25rem;
+            }
+        }
+
+        .create__button {
+            text-transform: uppercase;
+            width: 100%;
+            padding: 0.5rem 1rem;
+            margin: 0;
+            font-weight: var(--font-medium);
+            letter-spacing: 1px;
+
+            &:hover {
+                background-color: var(--secondary-color);
+            }
+        }
+    }
+
+    .playlists {
+        display: block;
+        height: 100%;
+        overflow-y: scroll;
+
+        padding: 0.25rem 0.5rem;
+
+        ul > li {
+            display: flex;
+            align-items: center;
+            margin: 0.25rem 0;
+
+            input.playlist-checkbox {
+                margin-right: 1rem;
+
+                height: 1rem;
+                width: 1rem;
+
+                @media screen and (min-width: 375px) {
+                    margin-right: 0.5rem;
+
+                    height: 0.75rem;
+                    width: 0.75rem;
+                }
+
+                @media screen and (min-width: 500px) {
+                    margin-right: 0.75rem;
+
+                    height: 0.85rem;
+                    width: 0.85rem;
+                }
+
+                @media screen and (min-width: 600px) {
+                    margin-right: 1rem;
+
+                    height: 1rem;
+                    width: 1rem;
+                }
+            }
+        }
+
+        @media screen and(min-width: 375px) {
+            font-size: 0.75rem;
+        }
+
+        @media screen and(min-width: 500px) {
+            font-size: 0.85rem;
+        }
+
+        @media screen and(min-width: 600px) {
+            font-size: 0.9rem;
+        }
+    }
+
+    .modal-icon {
+        font-size: 1.5rem;
+
+        @media screen and(min-width: 375px) {
+            font-size: 1rem;
+        }
+    }
+}

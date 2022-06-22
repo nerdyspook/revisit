@@ -5,7 +5,16 @@
     src: url(../../assets/fonts/Natalia.otf);
 }
 
+.home {
+    width: 100%;
+
+    @media screen and(min-width: 520px) {
+        max-width: calc(100vw - 90px);
+    }
+}
+
 .videos {
+    max-width: 100%;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
 

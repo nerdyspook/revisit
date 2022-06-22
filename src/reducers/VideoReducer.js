@@ -1,5 +1,3 @@
-import { act } from "react-dom/test-utils";
-
 export const videoReducer = (stateVideo, actionVideo) => {
     switch (actionVideo.type) {
         case "LOAD_VIDEOS":
@@ -23,6 +21,19 @@ export const videoReducer = (stateVideo, actionVideo) => {
 
         case "UPDATE_LIKED":
             return { ...stateVideo, liked: actionVideo.payload };
+
+        case "UPDATE_SINGLE_PLAYLIST":
+            return {
+                ...stateVideo,
+                playlists: stateVideo.playlists.map((playlist) =>
+                    playlist._id === actionVideo.payload._id
+                        ? { ...playlist, videos: actionVideo.payload.videos }
+                        : playlist
+                ),
+            };
+
+        case "UPDATE_PLAYLISTS":
+            return { ...stateVideo, playlists: actionVideo.payload };
 
         default:
             return stateVideo;
